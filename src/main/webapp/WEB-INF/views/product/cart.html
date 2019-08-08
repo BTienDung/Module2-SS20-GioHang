@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div align="center">
+    <h1>Spring MVC And Hibernate Shopping Cart</h1>
+    <table border="1" width="800px">
+        <tr>
+            <th>Options</th>
+            <th>Id</th>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+        </tr>
+
+        <tr th:each="pr,iterStat : ${session.cart}">
+
+            <td align="center">
+                <a th:href="@{/shoppingcart/delete/__${pr.product.id}__}">remove</a>
+            </td>
+            <td th:text="${pr.product.id.toString()}"></td>
+            <td align="center"><img width="150px" height="150px" th:src="@{'/i/' + ${pr.product.image.toString()}}"></td>
+            <td th:text="${pr.product.name.toString()}"></td>
+            <td th:text="${pr.product.price.toString()}"></td>
+            <td><input id="quantity" type="text" th:value="${pr.product.quantity.toString()}"/></td>
+
+
+            <td th:text="${pr.product.price * pr.product.quantity}"></td>
+
+        </tr>
+
+    </table>
+    <a th:href="@{/products}">shopping</a>
+</div>
+
+
+</body>
+</html>
